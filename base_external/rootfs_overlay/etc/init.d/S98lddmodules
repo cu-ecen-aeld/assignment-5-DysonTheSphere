@@ -1,16 +1,20 @@
 #!/bin/sh
 
+MOD_DIR="/lib/modules/$(uname -r)/updates"
+
 case "$1" in
     start)
         echo "Loading LDD modules..."
+        cd "$MOD_DIR"
         scull_load
-        insmod /lib/modules/$(uname -r)/updates/misc-modules/faulty.ko
+        module_load faulty
         modprobe hello
         ;;
     stop)
         echo "Unloading LDD modules..."
+        cd "$MOD_DIR"
         rmmod hello
-        rmmod faulty
+        module_unload faulty
         scull_unload
         ;;
     *)
