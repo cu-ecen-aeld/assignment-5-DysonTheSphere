@@ -6,7 +6,6 @@ case "$1" in
     start)
         echo "Loading LDD modules..."
         cd "$MOD_DIR"
-        depmod -a
         scull_load
         module_load faulty
         modprobe hello
